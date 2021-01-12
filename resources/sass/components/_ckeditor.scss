@@ -37,12 +37,12 @@
 
     p{
         font-size: 1.5rem !important;
-        font-family: $font-family-monospace !important;
+        font-family: $font-family-sans-serif !important;
         margin-bottom: 1rem;
     }
 
     i{
-        font-family: $font-family-monospace !important;
+        font-family: $font-family-sans-serif !important;
         font-style: italic !important;
     }
 
@@ -87,7 +87,7 @@
     color: $grey-3 !important;
 
     i{
-        font-family: $font-family-monospace !important;
+        font-family: $font-family-sans-serif !important;
         font-style: italic !important;
         line-height: 1.5rem !important;
     }
@@ -129,7 +129,7 @@
         padding: 0 !important;
         background-color: transparent !important;
         color: #7C92A7 !important;
-        font-family: $font-family-monospace !important;
+        font-family: $font-family-sans-serif !important;
         font-weight: normal !important;
         font-style: normal !important;
         text-decoration: none !important;

@@ -1,49 +1,102 @@
 // neutral
-$black-1: #202020;
-$grey-2: #373737;
-$grey-3: #334E68;
-$grey-6: #7C92A7;
-$grey-8:#ABBED4;
-$grey-9: #B7CCE4;
-$grey-10: #EDEDF6;
-$grey-13: #EBF1F6;
-$grey-15: #F4F6F9;
+$black:#000000;
+$black-1: #131315;
+$grey-1:#24292E;
+$grey-2: #313548;
+$grey-3: #4C516D;
+$grey-4:#5A5F79;
+$grey-5:#686C8A;
+$grey-6: #878AA6;
+$grey-7:#9D9FBC;
+$grey-8:#BCBBD0;
+$grey-9: #C3C2D7;
+$grey-10: #C3C2D7;
+$grey-11:#DCDEED;
+$grey-12:#E5E7F2;
+$grey-13: #E5E7F2;
+$grey-14:#EFF0F9;
+$grey-15: #F6F6FC;
 $grey-ph: #707070;
-$white-2: #FBFBFB;
+
+// white
 $white: #FFFFFF;
+$white-1:#FBFBFF;
+$white-2: #F8F8FC;
 
 // blue
 $blue: #3167F6;
 $blue-2: #1888FF;
+$blue-3:#5AAAFF;
 $blue-4: #A6D1FF;
-$blue-5: #F4F8FF;
+$blue-5: #CDE5FF;
 $blue-6: #EDF8FF;
 $blue-tp: #E9F2FF;
-$blue-tp2: #F4F8FF;
+$blue-tp-2: #F4F8FF;
 $blue-6: #EDF8FF;
+$dark-blue:#032BBC;
+$deep-blue:#0132E1;
 
-// purple magenta
+// magenta
+$dark-magenta:#BF0067;
+$deep-magenta:#E9007C;
 $magenta: #F13392;
 $magenta-2: #FF58AC;
+$magenta-3:#FF88BC;
+$magenta-4:#FFB8D2;
+$magenta-5:#FFD8E6;
+$magenta-tp:#FFEFF4;
+
+// purple
+$dark-purple:#582CA0;
+$deep-purple:#5616C0;
 $purple: #7233DA;
 $purple-2: #986CE0;
+$purple-3:#BB9FE9;
+$purple-4:#CFC1E5;
+$purple-5:#E4DFED;
 $purple-tp: #F7F4FB;
 
-// alerts
-$red-2: #FF4343;
-$red-3: #FF6666;
-$red-5: #FFD6D6;
-$green: #19CE58;
-$dark-green: #008746;
-$green-2: #4DC978;
-$green-3: #70DB95;
-$green-5: #D9FFDA;
+// red
+$dark-red:#BB0000;
+$deep-red:#DD1F1F;
+$red:#FF0000;
+$red-2:#FF4343;
+$red-3:#FF6666;
+$red-4:#FF9898;
+$red-5:#FFD6D6;
+$red-tp:#FFF4F4;
+
+// green
+$dark-green:#008746;
+$deep-green:#00AC5A;
+$green:#19CE58;
+$green-2:#4DC978;
+$green-3:#70DB95;
+$green-4:#A0F0BC;
+$green-5:#D9FFDA;
+$green-tp:#F0FFF4;
+
+// yellow
+$dark-yellow:#FFB800;
 $deep-yellow: #FFD600;
+$yellow:#FFEA29;
+$yellow-2:#FFEF5F;
+$yellow-3:#FFF387;
+$yellow-4:#FFF8BA;
+$yellow-5:#FFF8DB;
+$yellow-tp:#FFFBEA;
+
+
+//brand
+$brand-green:#FFF8BA;
+$brand-teal:#3CB5B5;
+$brand-lime:#A0D674;
+$brand-red:#F97060;
+$brand-navy:#33495D;
 
 // background
+$form-bg:#FFFDFC;
 $teal-bg: #98D3E0;
-$green-tp: #F0FFF4;
-$red-tp: #FFF4F4;
 $green-bg: #D3EAC8;
 
 .text-white {
@@ -54,7 +107,7 @@ $green-bg: #D3EAC8;
     color: $white !important;
 }
 
-.text-black-1{
+.text-black-1 {
     color: $black-1 !important;
 }
 
@@ -67,19 +120,20 @@ $green-bg: #D3EAC8;
     color: $grey-3 !important;
 }
 
-.text-grey-6, .text-grey {
+.text-grey-6,
+.text-grey {
     color: $grey-6 !important;
 }
 
-.text-blue{
+.text-blue {
     color: $blue !important;
 }
 
-.text-blue-2{
+.text-blue-2 {
     color: $blue-2 !important;
 }
 
-.text-green-2{
+.text-green-2 {
     color: $green-2 !important;
 }
 
@@ -92,15 +146,15 @@ $green-bg: #D3EAC8;
     color: $blue !important;
 }
 
-.bg-grey-13{
+.bg-grey-13 {
     background-color: $grey-13 !important;
 }
 
-.bg-grey-15{
+.bg-grey-15 {
     background-color: $grey-15 !important;
 }
 
-.bg-red-2{
+.bg-red-2 {
     background-color: $red-2;
 }
 
@@ -109,7 +163,7 @@ $green-bg: #D3EAC8;
 }
 
 .bg-blue-tp-2 {
-    background-color: $blue-tp2 !important;
+    background-color: $blue-tp-2 !important;
 }
 
 .bg-blue-tp {
@@ -132,7 +186,7 @@ $green-bg: #D3EAC8;
 .border-grey-13 {
     border: 1px solid $grey-13;
 }
+
 .white {
     color: $white;
 }
-
