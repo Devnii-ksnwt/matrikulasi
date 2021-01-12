@@ -15,7 +15,7 @@
 }
 
 .btn-skip {
-    background-color: $blue-tp2 !important;
+    background-color: $blue-tp-2 !important;
     color: $blue !important;
     border: 0;
     &:hover {
@@ -633,7 +633,7 @@
     flex-direction: row;
     padding: 1.4rem 2rem !important;
     color: $blue;
-    background: $blue-tp2;
+    background: $blue-tp-2;
 
     i {
         display: block !important;
@@ -732,7 +732,7 @@
 }
 
 .btn-ma-view-as {
-    background-color: $blue-tp2;
+    background-color: $blue-tp-2;
     height: 160px;
     width: 160px;
     text-align: center;
