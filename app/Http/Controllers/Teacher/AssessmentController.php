@@ -1741,7 +1741,7 @@ class AssessmentController extends Controller
                 onclick="viewCreateSchedule(\'' . $v['id'] . '\',\'' . $v['name'] . '\')">Tugaskan Siswa</a></td>';
             }
 
-            if ($v['schedule']['schedulable_status'] === 'Undone') {
+            if ($v['schedule'] !== null && $v['schedule']['schedulable_status'] === 'Undone') {
                 $view .= '<td colspan="6" class="text-grey-3">Belum mengerjakan.
                 <a class="text-primary" style="cursor:pointer"\
                 onclick="viewUpdateSchedule(\'' . $v['id'] . '\',\'' .
@@ -1751,11 +1751,11 @@ class AssessmentController extends Controller
                 >Edit Penugasan</a></td>';
             }
 
-            if ($v['schedule']['schedulable_status'] === 'Ongoing') {
+            if ($v['schedule'] !== null && $v['schedule']['schedulable_status'] === 'Ongoing') {
                 $view .= '<td colspan="6" class="text-grey-3">Sedang mengerjakan.</td>';
             }
 
-            if ($v['schedule']['schedulable_status'] === 'Done') {
+            if ($v['schedule'] !== null && $v['schedule']['schedulable_status'] === 'Done') {
                 $startTime = Carbon::parse($v['latest_task']['start_time']);
                 $finishTime = Carbon::parse($v['latest_task']['finish_time']);
                 $diff = $finishTime->diffInMinutes($startTime);
