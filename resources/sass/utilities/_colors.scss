@@ -18,10 +18,72 @@ $grey-14:#EFF0F9;
 $grey-15: #F6F6FC;
 $grey-ph: #707070;
 
+$greys: "grey-1"#24292E,
+"grey-2"#313548,
+"grey-3"#4C516D,
+"grey-4"#5A5F79,
+"grey-5"#686C8A,
+"grey-6"#878AA6,
+"grey-7"#9D9FBC,
+"grey-8"#BCBBD0,
+"grey-9"#C3C2D7,
+"grey-10"#C3C2D7,
+"grey-11"#DCDEED,
+"grey-12"#E5E7F2,
+"grey-13"#E5E7F2,
+"grey-14"#EFF0F9,
+"grey-15"#F6F6FC,
+"grey-ph"#707070,
+;
+
+// class neutral
+.black {
+    color: $black;
+}
+
+.bg-black {
+    background: $black;
+}
+
+.black-1 {
+    color: $black-1;
+}
+
+.bg-black-1 {
+    background: $black-1;
+}
+
+@each $name,
+$color in $greys {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
+
 // white
 $white: #FFFFFF;
 $white-1:#FBFBFF;
 $white-2: #F8F8FC;
+
+$whites: "white"#FFFFFF,
+"white-1"#FBFBFF,
+"white-2"#F8F8FC,
+;
+
+@each $name,
+$color in $whites {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
 
 // blue
 $blue: #3167F6;
@@ -32,9 +94,31 @@ $blue-5: #CDE5FF;
 $blue-6: #EDF8FF;
 $blue-tp: #E9F2FF;
 $blue-tp-2: #F4F8FF;
-$blue-6: #EDF8FF;
 $dark-blue:#032BBC;
 $deep-blue:#0132E1;
+
+$blues: "blue"#3167F6,
+"blue-2"#1888FF,
+"blue-3"#5AAAFF,
+"blue-4"#A6D1FF,
+"blue-5"#CDE5FF,
+"blue-6"#EDF8FF,
+"blue-tp"#E9F2FF,
+"blue-tp-2"#F4F8FF,
+"dark-blue"#032BBC,
+"deep-blue"#0132E1,
+;
+
+@each $name,
+$color in $blues {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
 
 // magenta
 $dark-magenta:#BF0067;
@@ -46,6 +130,27 @@ $magenta-4:#FFB8D2;
 $magenta-5:#FFD8E6;
 $magenta-tp:#FFEFF4;
 
+$magentas: "dark-magenta"#BF0067,
+"deep-magenta"#E9007C,
+"magenta"#F13392,
+"magenta-2"#FF58AC,
+"magenta-3"#FF88BC,
+"magenta-4"#FFB8D2,
+"magenta-5"#FFD8E6,
+"magenta-tp-2"#FFEFF4,
+;
+
+@each $name,
+$color in $magentas {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
+
 // purple
 $dark-purple:#582CA0;
 $deep-purple:#5616C0;
@@ -55,6 +160,27 @@ $purple-3:#BB9FE9;
 $purple-4:#CFC1E5;
 $purple-5:#E4DFED;
 $purple-tp: #F7F4FB;
+
+$purples: "dark-purple"#582CA0,
+"deep-purple"#5616C0,
+"purple"#7233DA,
+"purple-2"#986CE0,
+"purple-3"#BB9FE9,
+"purple-4"#CFC1E5,
+"purple-5"#E4DFED,
+"purple-tp"#F7F4FB,
+;
+
+@each $name,
+$color in $purples {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
 
 // red
 $dark-red:#BB0000;
@@ -66,6 +192,27 @@ $red-4:#FF9898;
 $red-5:#FFD6D6;
 $red-tp:#FFF4F4;
 
+$reds: "dark-red"#BB0000,
+"deep-red"#DD1F1F,
+"red"#FF0000,
+"red-2"#FF4343,
+"red-3"#FF6666,
+"red-4"#FF9898,
+"red-5"#FFD6D6,
+"red-tp"#FFF4F4,
+;
+
+@each $name,
+$color in $reds {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
+
 // green
 $dark-green:#008746;
 $deep-green:#00AC5A;
@@ -75,6 +222,27 @@ $green-3:#70DB95;
 $green-4:#A0F0BC;
 $green-5:#D9FFDA;
 $green-tp:#F0FFF4;
+
+$greens: "dark-green"#008746,
+"deep-green"#00AC5A,
+"green"#19CE58,
+"green-2"#4DC978,
+"green-3"#70DB95,
+"green-4"#A0F0BC,
+"green-5"#D9FFDA,
+"green-tp"#F0FFF4,
+;
+
+@each $name,
+$color in $greens {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
 
 // yellow
 $dark-yellow:#FFB800;
@@ -86,6 +254,27 @@ $yellow-4:#FFF8BA;
 $yellow-5:#FFF8DB;
 $yellow-tp:#FFFBEA;
 
+$yellows: "dark-yellow"#FFB800,
+"deep-yellow"#FFD600,
+"yellow"#FFEA29,
+"yellow-2"#FFEF5F,
+"yellow-3"#FFF387,
+"yellow-4"#FFF8BA,
+"yellow-5"#FFF8DB,
+"yellow-tp"#FFFBEA,
+;
+
+@each $name,
+$color in $yellows {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
+
 
 //brand
 $brand-green:#FFF8BA;
@@ -94,10 +283,46 @@ $brand-lime:#A0D674;
 $brand-red:#F97060;
 $brand-navy:#33495D;
 
+$brands:
+"brand-green"#FFF8BA,
+"brand-teal"#3CB5B5,
+"brand-lime"#A0D674,
+"brand-red"#F97060,
+"brand-navy"#33495D,
+;
+
+@each $name,
+$color in $brands {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
+
 // background
 $form-bg:#FFFDFC;
 $teal-bg: #98D3E0;
 $green-bg: #D3EAC8;
+
+$backgrounds:
+"form-bg"#FFFDFC,
+"teal-bg"#98D3E0,
+"green-bg"#D3EAC8,
+;
+
+@each $name,
+$color in $backgrounds {
+    .#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+}
 
 .text-white {
     color: $white !important;
@@ -137,7 +362,7 @@ $green-bg: #D3EAC8;
     color: $green-2 !important;
 }
 
-.red-3{
+.red-3 {
     color: $red-3;
 }
 
@@ -158,7 +383,7 @@ $green-bg: #D3EAC8;
     background-color: $red-2;
 }
 
-.bg-red-5{
+.bg-red-5 {
     background-color: $red-5;
 }
 

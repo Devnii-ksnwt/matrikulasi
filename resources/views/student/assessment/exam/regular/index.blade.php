@@ -477,7 +477,7 @@
                     <div id="choice-${keyIndex}" data-id="${answerData.id}" class="choice-group-a mb-2 mb-md-0 mb-lg-0 mb-xl-0 ml-0 assessment-choice ${answerData.answer === key ? 'active' : ''}">
                         <span>${key}</span>
                     </div>
-                    <div class="ml-4">
+                    <div class="ml-4 choice-option">
                         ${choices[key]}
                     </div>
                 </div>
