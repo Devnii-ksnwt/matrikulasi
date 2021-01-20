@@ -144,220 +144,212 @@
             </table>
         </div>
     @else
-        <ul class="nav nav-justified nav-tab-kejar  mt-8" id="myTab" role="tablist">
-            <li class="nav-item w-50 text-center" role="presentation">
-                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Penugasan dan Nilai</a>
+        <ul class="nav nav-justified nav-tab-kejar mt-8">
+            <li class="nav-item w-50 text-center">
+                <a class='nav-link @if($page_type === "MANAGE_TASK_SCORE") active @endif'
+                    href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment/manage-task-score') }}">
+                    Penugasan dan Nilai
+                </a>
             </li>
-            <li class="nav-item w-50 text-center" role="presentation">
-                <a class="nav-link active" id="packgae-tab" data-toggle="tab" href="#packgae" role="tab" aria-controls="packgae" aria-selected="false">Soal</a>
+            <li class="nav-item w-50 text-center">
+                <a class='nav-link @if($page_type === "QUESTIONS") active @endif'
+                    href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment') }}">
+                    Soal
+                </a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="mt-8">
-                    <div>
-                        <a href="{{ URL('teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment/status-task/Undone') }}" class="text-black-1 text-decoration-none">
-                            <div class="w-100 bg-grey-15 mb-4 px-4 py-3">
-                                <i class="kejar-rombel"></i> Siswa Belum Mengerjakan (Semua Rombel)
-                            </div>
-                        </a>
+            @if($page_type === "MANAGE_TASK_SCORE")
+                @include('teacher.subject_teacher.assessment.score.manage_task_score')
+            @elseif($page_type === "QUESTIONS")
+                @if($newestPackStatus ?? '' !== "" && $type === "MINI_ASSESSMENT")
+                    <div class="answer-note text-grey-3 mt-8" id="answer_status">
+                        Input semua paket soal beserta kunci jawabannya sebelum menugaskan siswa.
                     </div>
-                    @foreach($studentGroup as $data)
-                        <div>
-                            <a href="{{ URL('teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment/student-group/'.$data['id'].'/score') }}" class="text-black-1 text-decoration-none">
-                                <div class="w-100 bg-grey-15 mb-4 px-4 py-3">
-                                    <i class="kejar-rombel"></i> Rombel {{$data['name']}}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="tab-pane fade show active" id="packgae" role="tabpanel" aria-labelledby="packgae-tab">
-                @if($newestPackStatus !== "" && $type === "MINI_ASSESSMENT")
-                <div class="answer-note text-grey-3 mt-8" id="answer_status">
-                    Input semua paket soal beserta kunci jawabannya sebelum menugaskan siswa.
-                </div>
-                @endif
-
-                <div class="row mt-8 mb-3 align-items-center">
-                    <div class="col">
-                        <h3>Pengaturan</h3>
-                    </div>
-                    <div class="col col-sm-2">
-                        @if($type === 'ASSESSMENT')
-                        <button class="btn bg-white btn-revise" onclick="changeDurationModal()"><i class="kejar-setting"></i>Ubah</button>
-                        @else
-                        <button class="btn bg-white btn-revise" data-toggle="modal" data-target="#setting_pack"><i class="kejar-setting"></i>Ubah</button>
-                        @endif
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    @if(isset($assessments[0]['pdf_password']) == true)
-                        <div class="col">
-                            <h5>Token/Password PDF</h5>
-                            <h5 class="text-reguler">{{($assessments[0]['pdf_password'] == null ? '-' : $assessments[0]['pdf_password'])}}</h5>
-                        </div>
                     @endif
-                    <div class="col">
-                        <h5>Durasi</h5>
-                        <h5 class="text-reguler">
-                            <span id="duration-caption">{{($assessments[0]['duration'] == null ? '-' : $assessments[0]['duration'].' menit')}}
-                            </span>
-                        </h5>
-                    </div>
-                </div>
 
-                @if(count($questions) > 0 && $type === "MINI_ASSESSMENT")
-                <div class="row">
-                    <div class="col">
-                        <h5>Banyaknya Soal</h5>
-                        <h5 class="text-reguler">{{count($questions).' soal'}}</h5>
+                    <div class="row mt-8 mb-3 align-items-center">
+                        <div class="col">
+                            <h3>Pengaturan</h3>
+                        </div>
+                        <div class="col col-sm-2">
+                            @if($type === 'ASSESSMENT')
+                            <button class="btn bg-white btn-revise" onclick="changeDurationModal()"><i class="kejar-setting"></i>Ubah</button>
+                            @else
+                            <button class="btn bg-white btn-revise" data-toggle="modal" data-target="#setting_pack"><i class="kejar-setting"></i>Ubah</button>
+                            @endif
+                        </div>
                     </div>
-                    <div class="col">
-                        <h5>Pilihan Jawaban</h5>
-                        <h5 class="text-reguler">
-                            <span id="duration-caption">{{count($questions[0]['choices'])}}</span>
-                        </h5>
-                    </div>
-                </div>
-                @endif
-
-                @if($type === 'ASSESSMENT')
-                    <h3 class="mb-4 mt-7">Daftar Soal</h3>
-                    <button class="btn-upload font-15" data-toggle="modal" data-target="#create-pilihan-ganda">
-                        <i class="kejar-add"></i>Tambah Soal
-                    </button>
-                    <!-- Pagination -->
-                    @if($questionMeta  && ($questionMeta['total'] > 10))
-                        <nav class="navigation mt-5">
-                            <div>
-                                <span class="pagination-detail">{{ $questionMeta['to'] ?? 0 }} dari {{ $questionMeta['total'] }} soal</span>
+                    <div class="row mb-4">
+                        @if(isset($assessments[0]['pdf_password']) == true)
+                            <div class="col">
+                                <h5>Token/Password PDF</h5>
+                                <h5 class="text-reguler">{{($assessments[0]['pdf_password'] == null ? '-' : $assessments[0]['pdf_password'])}}</h5>
                             </div>
-                            <ul class="pagination">
-                                <li class="page-item {{ (request()->page ?? 1) - 1 <= 0 ? 'disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ (request()->page ?? 1) - 1 }}" tabindex="-1">&lt;</a>
-                                </li>
-                                @for($i=1; $i <= $questionMeta['last_page']; $i++)
-                                <li class="page-item {{ (request()->page ?? 1) == $i ? 'active disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
-                                </li>
-                                @endfor
-                                <li class="page-item {{ ((request()->page ?? 1) + 1) > $questionMeta['last_page'] ? 'disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ (request()->page ?? 1) + 1 }}">&gt;</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    @endif()
+                        @endif
+                        <div class="col">
+                            <h5>Durasi</h5>
+                            <h5 class="text-reguler">
+                                <span id="duration-caption">{{($assessments[0]['duration'] == null ? '-' : $assessments[0]['duration'].' menit')}}
+                                </span>
+                            </h5>
+                        </div>
+                    </div>
 
-                    <div class="table-questions border-top-none">
-                    @php $no = $questionMeta['from']; @endphp
-                    @foreach($questions as $i => $question)
-                        <div class="card type-pilihan-ganda">
-                            <div class="w-100 bg-green px-4 py-3">
-                                <div class="row justify-content-between px-4">
-                                    <div>
-                                        <h5>SOAL {{ $no }}</h5>
-                                    </div>
-                                    <div>
-                                        <a href="javascript:void(0)" id="nav-{{$i}}" style="cursor: pointer;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="kejar-edit"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="nav-{{$i}}">
-                                            <a class="dropdown-item font-15" id="edit-q-{{$i}}" data-toggle="modal" style="cursor: pointer;" data-target="#update-pilihan-ganda"  data-url="{{ url('/teacher/subject-teacher/assessment/question/' . $question['id'].'/edit/') }}">
-                                                Edit Soal
+                    @if(count($questions) > 0 && $type === "MINI_ASSESSMENT")
+                    <div class="row">
+                        <div class="col">
+                            <h5>Banyaknya Soal</h5>
+                            <h5 class="text-reguler">{{count($questions).' soal'}}</h5>
+                        </div>
+                        <div class="col">
+                            <h5>Pilihan Jawaban</h5>
+                            <h5 class="text-reguler">
+                                <span id="duration-caption">{{count($questions[0]['choices'])}}</span>
+                            </h5>
+                        </div>
+                    </div>
+                    @endif
+
+                    @if($type === 'ASSESSMENT')
+                        <h3 class="mb-4 mt-7">Daftar Soal</h3>
+                        <button class="btn-upload font-15" data-toggle="modal" data-target="#create-pilihan-ganda">
+                            <i class="kejar-add"></i>Tambah Soal
+                        </button>
+                        <!-- Pagination -->
+                        @if($questionMeta  && ($questionMeta['total'] > 10))
+                            <nav class="navigation mt-5">
+                                <div>
+                                    <span class="pagination-detail">{{ $questionMeta['to'] ?? 0 }} dari {{ $questionMeta['total'] }} soal</span>
+                                </div>
+                                <ul class="pagination">
+                                    <li class="page-item {{ (request()->page ?? 1) - 1 <= 0 ? 'disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ (request()->page ?? 1) - 1 }}" tabindex="-1">&lt;</a>
+                                    </li>
+                                    @for($i=1; $i <= $questionMeta['last_page']; $i++)
+                                    <li class="page-item {{ (request()->page ?? 1) == $i ? 'active disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                                    </li>
+                                    @endfor
+                                    <li class="page-item {{ ((request()->page ?? 1) + 1) > $questionMeta['last_page'] ? 'disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ (request()->page ?? 1) + 1 }}">&gt;</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @endif()
+
+                        <div class="table-questions border-top-none">
+                        @php $no = $questionMeta['from']; @endphp
+                        @foreach($questions as $i => $question)
+                            <div class="card type-pilihan-ganda">
+                                <div class="w-100 bg-green px-4 py-3">
+                                    <div class="row justify-content-between px-4">
+                                        <div>
+                                            <h5>SOAL {{ $no }}</h5>
+                                        </div>
+                                        <div>
+                                            <a href="javascript:void(0)" id="nav-{{$i}}" style="cursor: pointer;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="kejar-edit"></i>
                                             </a>
-                                            <a class="dropdown-item font-15" href="javascript:void(0)" style="cursor: pointer;" data-toggle="modal" data-target="#delete_question"
-                                                onclick="setDelete('{{$question['id']}}')">
-                                                Hapus Soal
-                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="nav-{{$i}}">
+                                                <a class="dropdown-item font-15" id="edit-q-{{$i}}" data-toggle="modal" style="cursor: pointer;" data-target="#update-pilihan-ganda"  data-url="{{ url('/teacher/subject-teacher/assessment/question/' . $question['id'].'/edit/') }}">
+                                                    Edit Soal
+                                                </a>
+                                                <a class="dropdown-item font-15" href="javascript:void(0)" style="cursor: pointer;" data-toggle="modal" data-target="#delete_question"
+                                                    onclick="setDelete('{{$question['id']}}')">
+                                                    Hapus Soal
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="editor-display" id="q_question_{{$i}}">
-                                    {!! $question['question'] !!}
-                                </div>
-                                <textarea hidden>{{$question['question']}}</textarea>
-                                <textarea hidden>{{$question['explanation']}}</textarea>
-                                <div class="question-answer-group">
-                                <table class="question-answer-table">
-                                    @foreach($question['choices'] as $key => $choice)
-                                    <tr>
-                                        <td>
-                                            @if($key == $question['answer'])
-                                            <i class="kejar-radio-button"></i>
-                                            @else
-                                            <i class="kejar-belum-dikerjakan"></i>
-                                            @endif
-                                        </td>
-                                        <td class="editor-display">{!! $choice !!}</td>
-                                    </tr>
-                                    @endforeach
-                                </table>
-                                </div>
-                                <div id="q_answer_{{$i}}" hidden>{!! $question['answer'] !!}</div>
-                                <div id="q_choices_{{$i}}" hidden>{{json_encode($question['choices'])}}</div>
-                                @if($question['explanation'] !== null && $question['explanation'] !== '' )
-                                <div class="explanation-group">
-                                    <strong>Pembahasan</strong>
-                                    <div class="editor-display">
-                                        <div id="q_explanation_{{$i}}">{!! $question['explanation'] !!}</div>
+                                <div class="card-body">
+                                    <div class="editor-display" id="q_question_{{$i}}">
+                                        {!! $question['question'] !!}
                                     </div>
+                                    <textarea hidden>{{$question['question']}}</textarea>
+                                    <textarea hidden>{{$question['explanation']}}</textarea>
+                                    <div class="question-answer-group">
+                                    <table class="question-answer-table">
+                                        @foreach($question['choices'] as $key => $choice)
+                                        <tr>
+                                            <td>
+                                                @if($key == $question['answer'])
+                                                <i class="kejar-radio-button"></i>
+                                                @else
+                                                <i class="kejar-belum-dikerjakan"></i>
+                                                @endif
+                                            </td>
+                                            <td class="editor-display">{!! $choice !!}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                    </div>
+                                    <div id="q_answer_{{$i}}" hidden>{!! $question['answer'] !!}</div>
+                                    <div id="q_choices_{{$i}}" hidden>{{json_encode($question['choices'])}}</div>
+                                    @if($question['explanation'] !== null && $question['explanation'] !== '' )
+                                    <div class="explanation-group">
+                                        <strong>Pembahasan</strong>
+                                        <div class="editor-display">
+                                            <div id="q_explanation_{{$i}}">{!! $question['explanation'] !!}</div>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
+                        @php $no++; @endphp
+                        @endforeach
                         </div>
-                    @php $no++; @endphp
-                    @endforeach
-                    </div>
-                    <!-- Pagination -->
-                    @if($questionMeta && ($questionMeta['total'] > 10))
-                        <nav class="navigation mt-5">
-                            <div>
-                                <span class="pagination-detail">{{ $questionMeta['to'] ?? 0 }} dari {{ $questionMeta['total'] }} soal</span>
+                        <!-- Pagination -->
+                        @if($questionMeta && ($questionMeta['total'] > 10))
+                            <nav class="navigation mt-5">
+                                <div>
+                                    <span class="pagination-detail">{{ $questionMeta['to'] ?? 0 }} dari {{ $questionMeta['total'] }} soal</span>
+                                </div>
+                                <ul class="pagination">
+                                    <li class="page-item {{ (request()->page ?? 1) - 1 <= 0 ? 'disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ (request()->page ?? 1) - 1 }}" tabindex="-1">&lt;</a>
+                                    </li>
+                                    @for($i=1; $i <= $questionMeta['last_page']; $i++)
+                                    <li class="page-item {{ (request()->page ?? 1) == $i ? 'active disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                                    </li>
+                                    @endfor
+                                    <li class="page-item {{ ((request()->page ?? 1) + 1) > $questionMeta['last_page'] ? 'disabled' : '' }}">
+                                        <a class="page-link" href="?page={{ (request()->page ?? 1) + 1 }}">&gt;</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @endif()
+                    @else
+                        <h3 class="mb-4 mt-7">Paket</h3>
+                        @for($i=0; $i < count($assessments); $i++)
+                            <div onclick="viewMA(`{{$assessments[$i]['id']}}`, 'Paket {{$i + 1}}')" class="btn-package">
+                                Paket {{$i + 1}}
                             </div>
-                            <ul class="pagination">
-                                <li class="page-item {{ (request()->page ?? 1) - 1 <= 0 ? 'disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ (request()->page ?? 1) - 1 }}" tabindex="-1">&lt;</a>
-                                </li>
-                                @for($i=1; $i <= $questionMeta['last_page']; $i++)
-                                <li class="page-item {{ (request()->page ?? 1) == $i ? 'active disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
-                                </li>
-                                @endfor
-                                <li class="page-item {{ ((request()->page ?? 1) + 1) > $questionMeta['last_page'] ? 'disabled' : '' }}">
-                                    <a class="page-link" href="?page={{ (request()->page ?? 1) + 1 }}">&gt;</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    @endif()
-                @else
-                    <h3 class="mb-4 mt-7">Paket</h3>
-                    @for($i=0; $i < count($assessments); $i++)
-                        <div onclick="viewMA(`{{$assessments[$i]['id']}}`, 'Paket {{$i + 1}}')" class="btn-package">
-                            Paket {{$i + 1}}
-                        </div>
-                    @endfor
-                    <button class="btn-upload font-15" data-toggle="modal" data-target="#add-ma">
-                        <i class="kejar-add"></i>Tambah Paket
-                    </button>
-                @endif
-            </div>
+                        @endfor
+                        <button class="btn-upload font-15" data-toggle="modal" data-target="#add-ma">
+                            <i class="kejar-add"></i>Tambah Paket
+                        </button>
+                    @endif
+            @endif
         </div>
     @endif
 </div>
 <input type="hidden" id="edit_q_id" />
 <input type="hidden" id="selectedChoice" />
-<?php $list = ''; ?>
-@if($type === 'ASSESSMENT')
+    @php $list = ''; @endphp
+    @if($type === 'ASSESSMENT' && $page_type === 'QUESTIONS')
         @for($i=0; $i <= count($questions) - 1; $i++)
-            <?php $list .= "{$questions[$i]['id']},"; ?>
+            @php $list .= "{$questions[$i]['id']},"; @endphp
         @endfor
     @endif
-<textarea id="question_list" hidden><?php echo $list; ?></textarea>
-@include('teacher.subject_teacher.assessment.mini._upload_pdf')
+<textarea id="question_list" hidden>{{$list}}</textarea>
+
+@if($page_type === 'QUESTIONS'))
+    @include('teacher.subject_teacher.assessment.mini._upload_pdf')
+@endif
+
 @if(count($assessments) > 0)
     @include('teacher.subject_teacher.assessment.mini._setting_package')
 
@@ -387,7 +379,7 @@
 <script src="{{ mix('/js/admin/question/literasi.js') }}"></script>
 
 <script>
-    var failedId = '{{$newestPackStatus}}';
+    var failedId = '{{$newestPackStatus ?? ''}}';
     var type = '{{$type}}';
     $(document).ready(() => {
         var params = window.location.search.substr(1);

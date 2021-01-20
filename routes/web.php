@@ -218,14 +218,23 @@ Route::middleware('session')->group(function () {
                     '{assessmentGroupId}/subject/{subject_id}/{grade}/student-groups/{student_group_id}',
                     'Teacher\AssessmentController@studentGroupDetail',
                 );
+
+                Route::get(
+                    '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/manage-task-score',
+                    'Teacher\AssessmentController@manageTaskScore',
+                );
+
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/{assessType}',
                     'Teacher\AssessmentController@setTypeAssessment',
                 );
+
+                // questions
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment',
                     'Teacher\AssessmentController@assessment',
                 );
+
                 Route::post(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment',
                     'Teacher\AssessmentController@createMiniAssessment',
@@ -234,7 +243,6 @@ Route::middleware('session')->group(function () {
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/{assessmentId}',
                     'Teacher\AssessmentController@settingMiniAssessment',
                 );
-
 
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/student-group/{studentGroupId}/score',

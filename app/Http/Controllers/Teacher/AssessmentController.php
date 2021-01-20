@@ -436,6 +436,8 @@ class AssessmentController extends Controller
 
     public function assessment($teacherType, $assessmentGroupId, $subjectId, $grade, Request $request)
     {
+        // question page
+
         $schoolId = session()->get('user.userable.school_id');
 
         $academicCalendar = new AcademicCalendar;
@@ -451,14 +453,6 @@ class AssessmentController extends Controller
         $batchResponse = $batchApi->index($schoolId, $batchFilter);
 
         $batchResult = $batchResponse['data'] ?? [];
-
-        $studentGroupApi = new StudentGroupApi;
-        $studentGroup = [];
-
-        foreach ($batchResult as $data) {
-            $classResponse = $studentGroupApi->index($schoolId, $data['id']);
-            $studentGroup = array_merge($studentGroup, $classResponse['data'] ?? []);
-        }
 
         $assessmentGroup = $this->assessmentGroups($assessmentGroupId);
 
@@ -501,6 +495,36 @@ class AssessmentController extends Controller
             }
         } else {
             $dataForAssessment = $dataAssessment;
+        }
+
+        $imageUpload = url('/teacher/questions/image-upload');
+        // $imageUpload = env('API_HOST').'/libraries/questions/image-upload';
+
+        // manage task score
+        if (isset($request->page_type) && $request->page_type === 'manage-task-score') {
+            $studentGroupApi = new StudentGroupApi;
+            $studentGroup = [];
+
+            foreach ($batchResult as $data) {
+                $classResponse = $studentGroupApi->index($schoolId, $data['id']);
+                $studentGroup = array_merge($studentGroup, $classResponse['data'] ?? []);
+            }
+
+            return view('teacher.subject_teacher.assessment.index')
+                    ->with('assessmentGroupId', $assessmentGroupId)
+                    ->with('assessmentGroup', $assessmentGroup)
+                    ->with('assessments', $dataForAssessment)
+                    ->with('assessmentsMeta', $assessments['meta'])
+                    ->with('subject', $subjectDetail['data'])
+                    ->with('grade', $grade)
+                    ->with('dualType', $dualData)
+                    ->with('teacherType', $teacherType)
+                    ->with('type', $viewType)
+                    ->with('studentGroup', $studentGroup)
+                    ->with('questionCount', $questionCount)
+                    ->with('imageUpload', $imageUpload)
+                    ->with('page_type', 'MANAGE_TASK_SCORE')
+                    ->with('message', 'Data success');
         }
 
         $questions = [];
@@ -549,9 +573,6 @@ class AssessmentController extends Controller
             $questions = $getQuestions['data'] ?? [];
         }
 
-        $imageUpload = url('/teacher/questions/image-upload');
-        // $imageUpload = env('API_HOST').'/libraries/questions/image-upload';
-
         return view('teacher.subject_teacher.assessment.index')
             ->with('assessmentGroupId', $assessmentGroupId)
             ->with('assessmentGroup', $assessmentGroup)
@@ -564,10 +585,10 @@ class AssessmentController extends Controller
             ->with('dualType', $dualData)
             ->with('teacherType', $teacherType)
             ->with('type', $viewType)
-            ->with('studentGroup', $studentGroup)
             ->with('newestPackStatus', $newestPackStatus)
             ->with('questionCount', $questionCount)
             ->with('imageUpload', $imageUpload)
+            ->with('page_type', 'QUESTIONS')
             ->with('message', 'Data success');
     }
 
@@ -2098,7 +2119,7 @@ class AssessmentController extends Controller
         foreach ($questions as $question) {
             $view .= '<div class="card type-pilihan-ganda">';
 
-            
+
             if ($question['is_correct']) {
                 $view .= '<div class="w-100 bg-green px-4 py-3">';
                 $view .= '<div class="row justify-content-between px-4">';
@@ -2218,12 +2239,23 @@ class AssessmentController extends Controller
         }
 
         $view .= '</tbody>';
-        
+
         $view .= '</table>';
         $view .= '</div>';
 
         $view .= '</div>';
 
         return $view;
+    }
+
+    public function manageTaskScore($teacherType, $assessmentGroupId, $subjectId, $grade)
+    {
+        return $this->assessment(
+            $teacherType,
+            $assessmentGroupId,
+            $subjectId,
+            $grade,
+            new Request(['page_type' => 'manage-task-score']),
+        );
     }
 }
