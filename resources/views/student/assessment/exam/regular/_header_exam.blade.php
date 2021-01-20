@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-black justify-content-between navbar-assesment">
     <a class="navbar-brand" href="#">
-        <div class="nav-link text-white px-0">
+        <div class="nav-link d-flex align-items-center text-white px-0">
             @if (session('user.role') === 'STUDENT')
             @if (!is_null(session('user.userable.photo')))
             <img src="" class="profile-pict" alt="">
