@@ -46,17 +46,26 @@ class AcademicCalendar
 
     private function shouldNotChangeYear()
     {
-        return (int) Carbon::now()->format('m') <= Carbon::JULY
-        && (int) Carbon::now()->format('d') < 19;
+        $currDate = Carbon::now();
+
+        $nextDate = Carbon::now();
+        $nextDate->setDay(19);
+        $nextDate->setMonth(6);
+
+        return $currDate <= $nextDate;
     }
 
     public function academicYearByGrade($grade)
     {
-        $yearNow = Carbon::now()->year;
-        $monthNow = Carbon::now()->month;
-        $dayNow = Carbon::now()->day;
+        $currDate = Carbon::now();
 
-        if ($monthNow <= 7 && $dayNow < 19) {
+        $nextDate = Carbon::now();
+        $nextDate->setDay(19);
+        $nextDate->setMonth(6);
+
+        $yearNow = Carbon::now()->year;
+
+        if ($currDate <= $nextDate) {
             $yearNow -= 1;
         }
 
