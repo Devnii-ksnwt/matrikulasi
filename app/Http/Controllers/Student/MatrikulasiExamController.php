@@ -166,6 +166,8 @@ class MatrikulasiExamController extends Controller
             }
         }
         
+        usort($roundsContainer, fn ($a, $b) => $a['order'] <=> $b['order']);
+        
         $nextRound = $roundsContainer[0] ?? [];
 
         session()->forget('old_answer');
