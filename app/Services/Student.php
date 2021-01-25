@@ -11,4 +11,11 @@ class Student extends Service
 
         return $this->showResponse($response);
     }
+
+    public function detail($studentId)
+    {
+        $response = $this->get("/users/students/$studentId");
+
+        return $this->showResponse($response);
+    }
 }
