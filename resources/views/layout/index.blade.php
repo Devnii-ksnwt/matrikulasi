@@ -33,7 +33,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <h6 class="pr-4">{{ session('user.userable.name') }}</h6>
-                        @if (session('user.role') === 'STUDENT')
+                        @if (session('user.userable_type') === 'STUDENT')
                         @if (!is_null(session('user.userable.photo')))
                         <img src="" class="profile-pict" alt="">
                         @else
@@ -43,7 +43,7 @@
                         <i class="kejar-dropdown pl-2"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        @if (session('user.role') === 'STUDENT')
+                        @if (session('user.userable_type') === 'STUDENT')
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editProfile"><i class="kejar-profile"></i> Ganti Foto Profil</a>
                         @endif
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updatePassword"><i class="kejar-password"></i> Ganti Password</a>
@@ -60,7 +60,7 @@
 
     @yield('content')
 
-    @if (session('user.role') !== 'ADMIN')
+    @if (session('user.userable_type') !== 'ADMIN')
     @include('shared._update_avatar')
     @endif
     @include('shared._update_password')

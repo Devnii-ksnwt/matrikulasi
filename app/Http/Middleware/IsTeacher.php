@@ -18,7 +18,7 @@ class IsTeacher
 
         $user = session('user');
         if ($user) {
-            if ($user['role'] !== 'TEACHER') {
+            if ($user['userable_type'] !== 'TEACHER') {
                 $request->session()->flash('message', 'Unauthorized');
 
                 return redirect('/');

@@ -18,7 +18,7 @@ class IsStudent
         $user = session('user');
 
         if ($user) {
-            if ($user['role'] !== 'STUDENT') {
+            if ($user['userable_type'] !== 'STUDENT') {
                 $request->session()->flash('message', 'Unauthorized');
 
                 return redirect('/');
