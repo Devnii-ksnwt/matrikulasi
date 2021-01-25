@@ -4,43 +4,41 @@
     </div>
     <div class="content-body">
         <div class="card-deck">
-            <a href="{{ $reportAccess ? url('/teacher/games/obr/class') : '#' }}" class="card">
+            <a href="{{ $reportAccess ? url('/teacher/games/obr/stages') : '#' }}" class="card">
                 <img src="{{ asset('assets/images/home/obr.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Operasi Bilangan Riil</h5>
                     <p class="card-text">Berhitung lebih cepat dan tepat agar belajar Matematika mudah dan lancar.</p>
                 </div>
             </a>
-            <a href="{{ $reportAccess ? url('/teacher/games/katabaku/class') : '#' }}" class="card">
+            <a href="{{ $reportAccess ? url('/teacher/games/katabaku/stages') : '#' }}" class="card">
                 <img src="{{ asset('assets/images/home/kata-baku.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Kata Baku</h5>
                     <p class="card-text">Menulis lebih profesional dengan Bahasa Indonesia yang baik dan benar.</p>
                 </div>
             </a>
-            <a href="{{ $reportAccess ? url('/teacher/games/vocabulary/class') : '#' }}" class="card">
+            <a href="{{ $reportAccess ? url('/teacher/games/vocabulary/stages') : '#' }}" class="card">
                 <img src="{{ asset('assets/images/home/vocab.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Vocabulary</h5>
                     <p class="card-text">Lebih percaya diri menulis dan berbicara dalam Bahasa Inggris karena kosakata yang kaya.</p>
                 </div>
             </a>
-            @env(['staging', 'local'])
-            <a href="{{ url('/teacher/games/toeicwords/class') }}" class="card">
+            <a href="{{ url('/teacher/games/toeicwords/stages') }}" class="card">
                 <img src="{{ asset('assets/images/home/toeic-words.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">TOEIC Words</h5>
                     <p class="card-text">Kuasi 4000 kosakata yang sering muncul pada TOEIC.</p>
                 </div>
             </a>
-            <a href="{{ url('/teacher/games/menulisefektif/class') }}" class="card">
+            <a href="{{ url('/teacher/games/menulisefektif/stages') }}" class="card">
                 <img src="{{ asset('assets/images/home/menulis-efektif.jpg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Menulis Efektif</h5>
                     <p class="card-text">Menulis kata yang tepat agar menjadi kalimat yang efektif.</p>
                 </div>
             </a>
-            @endenv
         </div>
     </div>
 </div>

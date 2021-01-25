@@ -560,3 +560,16 @@
 
     }
 }
+
+.page-pagination {
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .pagination-text {
+        @include h5-reg;
+        color: $grey-3;
+    }
+}

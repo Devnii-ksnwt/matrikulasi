@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Services\Batch as BatchApi;
 use App\Services\Game;
+use App\Services\Report;
 use App\Services\School;
 use App\Services\Stage as StageApi;
 use App\Services\StudentGroup as StudentApi;
@@ -16,6 +17,128 @@ use Illuminate\Support\Collection;
 
 class StageController extends Controller
 {
+
+    public function stages($game)
+    {
+        $gameApi = new Game;
+        $stageApi = new StageApi;
+
+        $filter = [
+            'page' => request()->page,
+            'per_page' => 10,
+        ];
+
+        $game = $gameApi->parse($game);
+        $stages = $stageApi->getAll(strtoupper($game['uri']), $filter) ?? [];
+
+        return view('teacher.stages.stages', compact('stages', 'game'));
+    }
+
+    public function showStage($game, $stageId)
+    {
+        $gameApi = new Game;
+        $stageApi = new StageApi;
+
+        $students = [];
+        if (request()->class) {
+            $reportApi = new Report;
+            $students = $reportApi->roundReport(request()->class, $stageId, 1, 99)['data'] ?? [];
+        }
+
+        $game = $gameApi->parse($game);
+        $stage = $stageApi->getDetail(strtoupper($game['uri']), $stageId)['data'];
+
+        $filter = [
+            'per_page' => 99,
+        ];
+        $stages = $stageApi->getAll(strtoupper($game['uri']), $filter)['data'];
+        $prevStages = [];
+        $nextStages = [];
+        foreach ($stages as $stageItem) {
+            if ($stageItem['order'] < $stage['order']) {
+                $prevStages[] = $stageItem;
+            }
+
+            if ($stageItem['order'] <= $stage['order']) {
+                continue;
+            }
+
+            $nextStages[] = $stageItem;
+        }
+
+        usort($prevStages, fn ($a, $b) => $a['order'] < $b['order']);
+        $prevStage = $prevStages[0] ?? [];
+        $nextStage = $nextStages[0] ?? [];
+        
+        return view('teacher.stages.show', compact('game', 'stage', 'prevStage', 'nextStage', 'students'));
+    }
+
+    public function getClasses()
+    {
+        $schoolId = session('user')['userable']['school_id'];
+
+        $schoolApi = new School;
+        $school = $schoolApi->detail($schoolId)['data'] ?? [];
+        $educational = $school['educational_stage'];
+
+        if (date('M') < 7) {
+            $firstYear = (date('Y') - 1) . '/' . date('Y');
+            $secondYear = (date('Y') - 2) . '/' . (date('Y') - 1);
+            $thirdYear = (date('Y') - 3) . '/' . (date('Y') - 2);
+        } else {
+            $firstYear = date('Y') . '/' . (date('Y') + 1);
+            $secondYear = date('Y') - 1 . '/' . date('Y');
+            $thirdYear = (date('Y') - 2) . '/' . (date('Y') - 1);
+        }
+
+        $backThreeYears = [
+            [
+                'year' => $thirdYear,
+                'grade' => $educational === 'SMP' ? 9 : 12,
+            ],
+            [
+                'year' => $secondYear,
+                'grade' => $educational === 'SMP' ? 8 : 11,
+            ],
+            [
+                'year' => $firstYear,
+                'grade' => $educational === 'SMP' ? 7 : 10,
+            ],
+        ];
+
+        $batchApi = new BatchApi;
+        $batches = [];
+        foreach ($backThreeYears as $year) {
+            $filter = [
+                'filter[entry_year]' => $year['year'],
+            ];
+            $batchList = $batchApi->index($schoolId, $filter)['data'] ?? [];
+
+            $tempBatchList = [];
+            foreach ($batchList as $BL) {
+                $tempBatchList[] = array_merge($BL, ['grade' => $year['grade']]);
+            }
+
+            $batches = array_merge($batches, $tempBatchList);
+        }
+
+        $studentApi = new StudentApi;
+        $classes = [];
+        foreach ($batches as $batch) {
+            $classList = $studentApi->index($schoolId, $batch['id'])['data'] ?? [];
+            $tempClassList = [];
+            foreach ($classList as $CL) {
+                $tempClassList[] = array_merge($CL, [
+                    'grade' => $batch['grade'],
+                    'class' => request()->class === $CL['id'] ? 'active' : '',
+                ]);
+            }
+
+            $classes = array_merge($classes, $tempClassList);
+        }
+
+        return response()->json(['data' => $classes]);
+    }
 
     public function index($game)
     {
