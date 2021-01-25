@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        @else
+        @elseif (count($students[0]['progress']) > 0)
         <div class="unempty-class">
             <div class="alert-kejar">
                 <div class="alert-card-icon">
@@ -85,7 +85,7 @@
                                 <th>Nama</th>
                                 <th>NIS</th>
                                 @foreach ($students[0]['progress'] as $round)
-                                <th>
+                                <th class="col-score">
                                     <a href="{{ url('teacher/games/' . $game['uri'] . '/stages/' . $stage['id'] . '/rounds') }}?round={{$round['round_id']}}&class={{ request()->class }}" class="link-open">
                                         {{ $round['round_order'] }}
                                         <img src="{{ asset('assets/images/icons/open.svg') }}" alt="" class="w-25">
@@ -105,7 +105,7 @@
                                 <td>{{ $student['nis'] }}</td>
                                 @foreach ($student['progress'] as $progress)
                                 <td class="text-right">
-                                    {{ $progress['score'] ?? '0.00' }}
+                                    {{ $progress['score'] ?? '-' }}
                                 </td>
                                 @endforeach
                             </tr>
@@ -115,6 +115,8 @@
                 </div>
             </div>
         </div>
+        @else
+            <h5 class="text-center">Ronde pada babak ini akan segera hadir.</h5>
         @endif
 
     </div>

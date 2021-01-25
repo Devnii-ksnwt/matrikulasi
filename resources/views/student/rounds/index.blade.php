@@ -98,7 +98,7 @@
                             </div>`;
                     });
                 } else {
-                    html = '<h5 class="text-center">Ronde pada babak ini akan segera hadir</h5>';
+                    html = '<h5 class="text-center">Ronde pada babak ini akan segera hadir.</h5>';
                 }
 
                 $('.list-group-student').html(html);

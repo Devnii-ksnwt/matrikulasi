@@ -274,6 +274,7 @@ a.link-open {
 }
 
 .table-kejar {
+    width: auto;
     box-sizing: border-box;
     thead tr th {
         box-sizing: border-box;
@@ -282,6 +283,10 @@ a.link-open {
         padding: 1.2rem;
         border: 2px solid #E5E7F2;
         
+    }
+
+    .col-score {
+        width: 4rem !important;
     }
 
     tbody tr td {
