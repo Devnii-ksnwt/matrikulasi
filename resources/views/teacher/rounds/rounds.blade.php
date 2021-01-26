@@ -68,7 +68,7 @@
                 <div class="kejar-question-list-group kejar-obr-question">
                     <h5 class="kejar-question-list-title">Beberapa soal yang ditampilkan</h5>
                     <div class="table-responsive">
-                        <table class="table table-kejar">
+                        <table class="table table-kejar w-100">
                             <thead>
                                 <tr>
                                     <th class="w-50">Soal</th>
@@ -97,7 +97,7 @@
                     <h5 class="kejar-question-list-title">Daftar Soal</h5>
 
                     <div class="table-responsive">
-                        <table class="table table-kejar">
+                        <table class="table table-kejar w-100">
                             <thead>
                                 <tr>
                                     <th class="w-50">Soal</th>
@@ -126,7 +126,7 @@
                     <h5 class="kejar-question-list-title">Daftar Soal</h5>
 
                     <div class="table-responsive">
-                        <table class="table table-kejar">
+                        <table class="table table-kejar w-100">
                             <thead>
                                 <tr>
                                     <th class="w-50">Soal</th>
@@ -155,7 +155,7 @@
                     <h5 class="kejar-question-list-title">Daftar Soal</h5>
 
                     <div class="table-responsive">
-                        <table class="table table-kejar">
+                        <table class="table table-kejar w-100">
                             <thead>
                                 <tr>
                                     <th class="w-50">Meaning</th>
