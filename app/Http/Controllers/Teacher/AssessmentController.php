@@ -1370,13 +1370,16 @@ class AssessmentController extends Controller
             $data['student_ids'] = $studentIds;
         }
 
-        if ($req->type === 'ASSESSMENT') {
-            if ($req->typeAssesment === 'MINI_ASSESSMENT') {
-                $data['schedulable_ids'] = explode(',', $req->assesment);
-            } else {
-                $data['schedulable_id'] = $req->assesment;
-            }
-        }
+        $data['schedulable_ids'] = explode(',', $req->package_choices);
+
+        // Archive dulu
+        // if ($req->type === 'ASSESSMENT') {
+        //     if ($req->typeAssesment === 'MINI_ASSESSMENT') {
+        //         $data['schedulable_ids'] = explode(',', $req->assesment);
+        //     } else {
+        //         $data['schedulable_id'] = $req->assesment;
+        //     }
+        // }
 
         $ScheduleApi = new ScheduleApi;
         $create = $ScheduleApi->bulkCreate($schoolId, $data);
@@ -1849,9 +1852,12 @@ class AssessmentController extends Controller
         $expiryDate = $this->request->input('expiryDate');
         $token = $this->request->input('token');
 
+        $schedulableIds = explode(',', $this->request->input('package_choices'));
+
         $payload = [
             'schedule_ids' => explode(',', $scheduleId),
             'start_time' => $startDate,
+            'schedulable_ids' => $schedulableIds,
             'finish_time' => $expiryDate,
             'token' => $token ?? null,
         ];

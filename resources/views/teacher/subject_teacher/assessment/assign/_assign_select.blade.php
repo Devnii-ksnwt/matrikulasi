@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tugaskan Siswa<br>
-                    <small>2/2 Pilih Rombel atau Siswa</small>
+                    <small>3/3 Pilih Rombel atau Siswa</small>
                 </h5>
                 <button class="close modal-close" onclick="modalAssignShow(1)">
                     <i class="kejar kejar-close"></i>
@@ -44,7 +44,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tugaskan Siswa<br>
-                    <small>2/2 Pilih Rombel</small>
+                    <small>3/3 Pilih Rombel</small>
                 </h5>
                 <button class="close modal-close" onclick="modalAssignShow(2)">
                     <i class="kejar kejar-close"></i>
@@ -124,7 +124,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tugaskan Siswa<br>
-                    <small>2/2 Pilih Siswa</small>
+                    <small>3/3 Pilih Siswa</small>
                 </h5>
                 <button class="close modal-close" onclick="modalAssignShow(2)">
                     <i class="kejar kejar-close"></i>
