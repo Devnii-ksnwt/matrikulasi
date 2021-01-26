@@ -4,11 +4,39 @@
 
 @section('content')
 <div class="container">
-
-    <!-- Link Back -->
-    <a class="btn-back" href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject') }}">
-        <i class="kejar-back"></i>Kembali
-    </a>
+    <div class="row mb-8">
+        <div class="col-12">
+            <ul class="nav nav-justified nav-tab-kejar mt-1">
+                <li class="nav-item w-50 text-center">
+                    <a class='nav-link @if($page_type === "MANAGE_TASK_SCORE") active @endif'
+                        href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment/manage-task-score') }}">
+                        Penugasan dan Nilai
+                    </a>
+                </li>
+                <li class="nav-item w-50 text-center">
+                    <a class='nav-link @if($page_type === "QUESTIONS") active @endif'
+                        href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment') }}">
+                        Soal
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 pt-2">
+            <!-- Link Back -->
+            <a class="btn-back" href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject') }}">
+                <i class="kejar-back"></i>Kembali
+            </a>
+        </div>
+        <div class="col-6">
+            @if(count($assessments) != 0)
+                <button class="btn btn-publish font-15 float-right" onclick="modalAssignShow(0)">
+                    <i class="kejar-siswa"></i>Tugaskan Siswa
+                </button>
+            @endif
+        </div>
+    </div>
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb">
@@ -51,7 +79,10 @@
                 </button>
             </div>
             <div class="col-sm-6">
-                <button class="btn-upload mb-0" onclick="setAdd('{{$assessmentGroupId}}', '{{$subject['id']}}', '{{$grade}}')">
+                @php
+                    $subjectId = $subject['id'];
+                @endphp
+                <button class="btn-upload mb-0" onclick="setAdd('{{$assessmentGroupId}}', '{{$subjectId}}', '{{$grade}}')">
                     <i class="kejar-add"></i>Input Soal
                 </button>
                 <div class="mt-3" id="LoadingAssess4" style="display:none">
@@ -72,10 +103,6 @@
                 </div>
             </div>
         </div>
-    @else
-        <button class="btn btn-publish font-15" onclick="modalAssignShow(1)">
-            <i class="kejar-siswa"></i>Tugaskan Siswa
-        </button>
     @endif
     @if(count($assessments) == 0)
         <h3 class="mt-8 mb-4">Unggah Naskah vs Input Soal</h3>
@@ -144,20 +171,6 @@
             </table>
         </div>
     @else
-        <ul class="nav nav-justified nav-tab-kejar mt-8">
-            <li class="nav-item w-50 text-center">
-                <a class='nav-link @if($page_type === "MANAGE_TASK_SCORE") active @endif'
-                    href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment/manage-task-score') }}">
-                    Penugasan dan Nilai
-                </a>
-            </li>
-            <li class="nav-item w-50 text-center">
-                <a class='nav-link @if($page_type === "QUESTIONS") active @endif'
-                    href="{{ url('/teacher/subject-teacher/'.$assessmentGroupId.'/subject/'.$subject['id'].'/'.$grade.'/assessment') }}">
-                    Soal
-                </a>
-            </li>
-        </ul>
         <div class="tab-content" id="myTabContent">
             @if($page_type === "MANAGE_TASK_SCORE")
                 @include('teacher.subject_teacher.assessment.score.manage_task_score')
@@ -355,6 +368,7 @@
 
     <!-- Include Modal Assign -->
 
+    @include('teacher.subject_teacher.assessment.assign._assign_package')
     @include('teacher.subject_teacher.assessment.assign._assign_schedule')
     @include('teacher.subject_teacher.assessment.assign._assign_select')
     @include('teacher.subject_teacher.assessment.assign._assign_success')
