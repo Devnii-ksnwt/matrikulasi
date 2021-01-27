@@ -2,7 +2,7 @@
 <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form action="{{ url( strtolower(session('user.role')) . '/change-profile') }}" method="post" name="change_profile">
+            <form action="{{ url( strtolower(session('user.userable_type')) . '/change-profile') }}" method="post" name="change_profile">
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="avatar-group">
-                                @if (session('user.role') === 'STUDENT')
+                                @if (session('user.userable_type') === 'STUDENT')
                                     @if (!is_null(session('user.userable.photo')))
                                         <img src="{{ session('user.userable.photo') }}" class="profile-pict" alt="">
                                     @else
@@ -26,7 +26,7 @@
                                     <i class="kejar-edit"></i>
                                 </button>
                             </div>
-                            @if (session('user.role') !== 'ADMIN')
+                            @if (session('user.userable_type') !== 'ADMIN')
                                 <input type="file" name="select_photo" hidden>
                                 <input type="hidden" name="photo">
                             @endif
@@ -34,7 +34,7 @@
                         <div class="col-12">
                             <h3>{{ session('user.userable.name') }}</h3>
                             <table class="profile-table">
-                                @if (session('user.role') === 'STUDENT')
+                                @if (session('user.userable_type') === 'STUDENT')
                                 <tr>
                                     <td>NIS</td>
                                     <td>{{ session('user.userable.nis') }}</td>
@@ -51,7 +51,7 @@
                                     <td>Sekolah</td>
                                     <td>{{ session('user.userable.school_name') }}</td>
                                 </tr>
-                                @elseif(session('user.role') === 'TEACHER')
+                                @elseif(session('user.userable_type') === 'TEACHER')
                                 <tr>
                                     <td>NIP</td>
                                     <td>{{ session('user.userable.nip') }}</td>
@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="crop-area">
-                            @if (session('user.role') === 'STUDENT')
+                            @if (session('user.userable_type') === 'STUDENT')
                                 @if (!is_null(session('user.userable.photo')))
                                 <img src="" class="profile-pict-crop" alt="">
                                 @else

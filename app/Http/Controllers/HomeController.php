@@ -20,15 +20,15 @@ class HomeController extends Controller
                 return redirect('/login');
             }
 
-            if ($user['role'] === 'STUDENT') {
+            if ($user['userable_type'] === 'STUDENT') {
                 return redirect('/student/dashboard');
             }
 
-            if ($user['role'] === 'ADMIN') {
+            if ($user['userable_type'] === 'ADMIN') {
                 return redirect('/admin/games');
             }
 
-            if ($user['role'] === 'TEACHER') {
+            if ($user['userable_type'] === 'TEACHER') {
                 return redirect('/teacher/games');
             }
         }

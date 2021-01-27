@@ -12,7 +12,7 @@
         <!-- form ganti password -->
         <div class="bg-lego">
             <div class="container-center">
-                <form class="card-384" action="{{ url('/' . strtolower(session('user.role') . '/change-password')) }}" method="post">
+                <form class="card-384" action="{{ url('/' . strtolower(session('user.userable_type') . '/change-password')) }}" method="post">
                     @csrf
                     @method('PATCH')
                     <h3>Ganti Password
@@ -62,7 +62,7 @@
         <!-- form ganti foto -->
         <div class="bg-lego">
             <div class="container-center">
-                <form class="card-384" action="{{ url('/' . strtolower(session('user.role') . '/change-profile')) }}" method="post" name="change_profile_onboarding">
+                <form class="card-384" action="{{ url('/' . strtolower(session('user.userable_type') . '/change-profile')) }}" method="post" name="change_profile_onboarding">
                     @csrf
                     @method('PATCH')
                     <h3>Pasang Foto Profil <a href="{{ url('/student/skip-change-info?type=photo') }}" class="close" data-dismiss="modal" aria-label="Close">

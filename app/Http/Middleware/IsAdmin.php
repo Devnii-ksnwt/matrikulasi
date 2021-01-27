@@ -17,7 +17,7 @@ class IsAdmin
     {
         $user = session('user');
         if ($user) {
-            if ($user['role'] !== 'ADMIN') {
+            if ($user['userable_type'] !== 'ADMIN') {
                 $request->session()->flash('message', 'Unauthorized');
 
                 return redirect('/');
