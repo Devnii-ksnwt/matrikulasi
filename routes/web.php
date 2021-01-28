@@ -227,14 +227,23 @@ Route::middleware('session')->group(function () {
                     '{assessmentGroupId}/subject/{subject_id}/{grade}/student-groups/{student_group_id}',
                     'Teacher\AssessmentController@studentGroupDetail',
                 );
+
+                Route::get(
+                    '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/manage-task-score',
+                    'Teacher\AssessmentController@manageTaskScore',
+                );
+
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/{assessType}',
                     'Teacher\AssessmentController@setTypeAssessment',
                 );
+
+                // questions
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment',
                     'Teacher\AssessmentController@assessment',
                 );
+
                 Route::post(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment',
                     'Teacher\AssessmentController@createMiniAssessment',
@@ -243,7 +252,6 @@ Route::middleware('session')->group(function () {
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/{assessmentId}',
                     'Teacher\AssessmentController@settingMiniAssessment',
                 );
-
 
                 Route::get(
                     '{assessmentGroupId}/subject/{subjectId}/{grade}/assessment/student-group/{studentGroupId}/score',
@@ -415,32 +423,50 @@ Route::middleware('session')->group(function () {
             Route::patch('/change-profile', 'Shared\ChangeProfileController@update');
             Route::get('/skip-change-info', 'Shared\ChangePasswordController@skip');
 
+            // Raport
             Route::prefix('/games')->group(function () {
-
+                
                 Route::get('/', 'HomeController@teacher');
 
-                Route::prefix('/{game}/class')->group(function () {
-
-                    Route::get('/', 'Teacher\StageController@index');
-
-                    Route::prefix('{batchId}/{studentGroupId}/stages')->group(function () {
-
-                        Route::get('/', 'Teacher\StageController@resultStage');
-
-                        Route::get('/{studentId}/detail', 'Teacher\RoundController@modal');
-
-                        Route::prefix('/{stageId}/rounds')->group(function () {
-
-                            Route::get('/', 'Teacher\RoundController@index');
-
-                            Route::prefix('/{roundId}')->group(function () {
-
-                                Route::get('/description', 'Teacher\RoundController@description');
-                            });
-                        });
-                    });
+                Route::prefix('/{game}/stages')->group(function () {
+                    Route::get('', 'Teacher\StageController@stages');
+                    Route::get('{stageId}', 'Teacher\StageController@showStage');
+                    Route::get('{stageId}/low', 'Teacher\StageController@index');
+    
+                    Route::get('{stageId}/rounds', 'Teacher\RoundController@showRound');
+                    Route::get('{stageId}/students/{studentId}', 'Teacher\RoundController@showStudent');
                 });
             });
+            
+            // API
+            Route::get('/api/classes', 'Teacher\StageController@getClasses');
+
+            // Route::prefix('/games')->group(function () {
+
+            //     Route::get('/', 'HomeController@teacher');
+
+            //     Route::prefix('/{game}/class')->group(function () {
+
+            //         Route::get('/', 'Teacher\StageController@index');
+
+            //         Route::prefix('{batchId}/{studentGroupId}/stages')->group(function () {
+
+            //             Route::get('/', 'Teacher\StageController@resultStage');
+
+            //             Route::get('/{studentId}/detail', 'Teacher\RoundController@modal');
+
+            //             Route::prefix('/{stageId}/rounds')->group(function () {
+
+            //                 Route::get('/', 'Teacher\RoundController@index');
+
+            //                 Route::prefix('/{roundId}')->group(function () {
+
+            //                     Route::get('/description', 'Teacher\RoundController@description');
+            //                 });
+            //             });
+            //         });
+            //     });
+            // });
         });
     });
 

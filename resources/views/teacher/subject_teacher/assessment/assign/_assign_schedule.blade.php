@@ -5,9 +5,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tugaskan Siswa<br>
-                    <small>1/2 Atur Jadwal</small>
+                    <small>2/3 Atur Jadwal</small>
                 </h5>
-                <button class="close modal-close" data-dismiss="modal">
+                <button class="close modal-close" onclick="modalAssignShow(0)">
                     <i class="kejar kejar-close"></i>
                 </button>
             </div>
@@ -127,7 +127,7 @@
             </div>
             <div class="modal-footer text-right">
                 <div class="text-right col-md-12">
-                    <button class="btn btn-link pull-right" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-link pull-right" onclick="modalAssignShow(0, true)">Batal</button>
                     <button class="btn btn-primary pull-right" onclick="modalAssignShow(2, true)">Lanjut</button>
                 </div>
             </div>
@@ -348,6 +348,18 @@
         }
 
         getStudentGroup();
+
+        function modalScheduleShow() {
+
+            var check_package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
+            if (check_package_choices.length > 0) {
+                $(".assignStudentsModalSection").modal('hide');
+                $("#assignStudentsModal-1").modal('show');
+            }else{
+                alert('Silahkan pilih paket data.');
+            }
+        }
+
         function modalAssignShow(val, withValidation = false){
 
             $('#duration-alert').hide();
@@ -427,6 +439,7 @@
 
         function submit() {
             var values = $("input[name='student_data[]']:checked").map(function(){return $(this).val();}).get();
+            var package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
             var start_date = '';
             var expiry_date = '';
             var token = '';
@@ -452,6 +465,7 @@
                 data: values,
                 token,
                 assesment,
+                package_choices,
                 start_date: start_date,
                 expiry_date: expiry_date,
             };
@@ -461,6 +475,7 @@
 
         function submitStudent() {
             var values = $("#NISTextarea").val().split(',');
+            var package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
 
             var start_date = '';
             var expiry_date = '';
@@ -488,6 +503,7 @@
                 token,
                 byNis: true,
                 assesment,
+                package_choices,
                 start_date: start_date,
                 expiry_date: expiry_date,
             };

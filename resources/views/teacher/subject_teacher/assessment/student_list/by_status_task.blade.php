@@ -255,7 +255,27 @@
             }
         }
 
+        function changeModalContent(type) {
+
+            if (type == 1) {
+                $("#modal-content-package").show();
+                $("#modal-content-schedule").hide();
+            }else if(type == 2){
+
+                var check_package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
+                if (check_package_choices.length > 0) {
+                    $("#modal-content-package").hide();
+                    $("#modal-content-schedule").show();
+                }else{
+                    alert('Silahkan pilih paket data.');
+                }
+            }
+        }
+
         function editData() {
+            $("#modal-content-package").show();
+            $("#modal-content-schedule").hide();
+
             $("#updateSchedule").modal('show');
         }
 
@@ -269,6 +289,7 @@
         }
 
         function updateAssign() {
+            var package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
             var scheduleId = getIdStudentChecked();
 
             var start_date = '';
@@ -307,6 +328,7 @@
             data = {
                 scheduleId,
                 token,
+                package_choices,
                 startDate: start_date,
                 expiryDate: expiry_date,
                 typeAssesment,

@@ -1,8 +1,13 @@
 * {
-    font-family: 'Roboto Mono';
+    font-family: $font-family-sans-serif;
 }
 
 // New exam Assessment Regular
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 .drawer-exam::-webkit-scrollbar {
     width: 4px;
@@ -200,6 +205,11 @@
 
 @media screen and (max-width: 768px) {
 
+    .choice-option {
+        max-width: 28rem;
+        word-break: break-all;
+    }
+
     .close-assessment-drawer {
         display: block;
     }
@@ -377,7 +387,7 @@
 
     .question .question-text {
         text-align: center;
-        font-size: 64px;
+        font-size: 60px;
         line-height: initial;
         color: #202020;
     }
@@ -391,7 +401,7 @@
     .answer .answer-input {
         border: 0px;
         border-bottom: 4px solid #A6D1FF;
-        font-size: 64px;
+        font-size: 60px;
         color: #334E68;
         padding: 8px 0px;
         width: 100%;
@@ -409,16 +419,16 @@
     }
 
     .next-button .btn-next {
-        background: #F13392;
+        background: $purple-tp;
         border-radius: 0px;
-        color: #f2f2f2;
+        color: $purple;
         padding: 20px 24px;
         font-size: 25px;
         font-weight: bold;
     }
 
     .next-button .btn-next i::before {
-        color: white;
+        color: $purple;
         font-size: 25px;
     }
 
@@ -444,7 +454,7 @@
         }
 
         .next-button .btn-next i::before {
-            color: white;
+            color: $purple;
             font-size: 19px;
         }
 
@@ -458,12 +468,12 @@
 
         /* Question */
         .question .question-text {
-            font-size: 28px;
+            font-size: 36px;
         }
 
         /* Answer Input */
         .answer .answer-input {
-            font-size: 28px !important;
+            font-size: 36px !important;
         }
 
         .timer-stick {
@@ -483,7 +493,7 @@
         }
 
         .next-button .btn-next i::before {
-            color: white;
+            color: $purple;
             font-size: 17px;
         }
     }
@@ -498,7 +508,7 @@
 
     .btn-next-disabled {
         background: #EBF1F6 !important;
-        color: #ffffff !important;
+        color: $purple !important;
         pointer-events: none;
     }
 
@@ -581,7 +591,7 @@
                 box-shadow: inset 0px 1.5px 2px rgba(0, 0, 0, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.15) !important;
                 border-radius: 0.4rem !important;
                 resize: none !important;
-                background: $blue-tp2;
+                background: $blue-tp-2;
                 border: 0 !important;
                 line-height: 180% !important;
                 text-align: left;
@@ -814,7 +824,7 @@
 }
 
 .toeic-description {
-    background: $blue-tp2;
+    background: $blue-tp-2;
     padding: 2.4rem 3.2rem;
     margin-top: 6.4rem;
 
@@ -946,8 +956,6 @@
 ._benar_salah_options div {
     width: 10rem;
 }
-
-._ya_tidak_options input {}
 
 ._ya_tidak_options input~label i::before {
     color: #7C92A7;
@@ -1872,7 +1880,7 @@
         display: inline;
 
         i {
-            font-family: $font-family-monospace !important;
+            font-family: $font-family-sans-serif !important;
             font-size: 1.5rem !important;
             font-style: italic !important;
         }
@@ -1937,7 +1945,7 @@
 
                 &:hover {
                     color: $purple;
-                    background-color: $blue-tp2;
+                    background-color: $blue-tp-2;
                 }
             }
         }

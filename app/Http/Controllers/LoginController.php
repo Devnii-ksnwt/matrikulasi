@@ -20,15 +20,15 @@ class LoginController extends Controller
                 return redirect('/login');
             }
 
-            if ($user['role'] === 'STUDENT') {
+            if ($user['userable_type'] === 'STUDENT') {
                 return redirect('/student/dashboard')->with('message', $message);
             }
 
-            if ($user['role'] === 'TEACHER') {
+            if ($user['userable_type'] === 'TEACHER') {
                 return redirect('/teacher/games')->with('message', $message);
             }
 
-            if ($user['role'] === 'ADMIN') {
+            if ($user['userable_type'] === 'ADMIN') {
                 return redirect('/admin/games')->with('message', $message);
             }
         }
@@ -53,7 +53,7 @@ class LoginController extends Controller
             $responseMe = $userApi->me();
             $request->session()->put('user', $responseMe['data']);
 
-            if ($responseMe['data']['role'] === 'STUDENT') {
+            if ($responseMe['data']['userable_type'] === 'STUDENT') {
                 // Mengambil nama sekolah
                 $schoolApi = new SchoolApi;
                 $responseSchool = $schoolApi->detail($responseMe['data']['userable']['school_id']);
@@ -92,7 +92,7 @@ class LoginController extends Controller
                 return redirect('/student/dashboard');
             }
 
-            if ($responseMe['data']['role'] === 'TEACHER') {
+            if ($responseMe['data']['userable_type'] === 'TEACHER') {
                 // Mengambil nama sekolah
                 $schoolApi = new SchoolApi;
                 $responseSchool = $schoolApi->detail($responseMe['data']['userable']['school_id']);
@@ -121,7 +121,7 @@ class LoginController extends Controller
                 return redirect('/teacher/games');
             }
 
-            if ($responseMe['data']['role'] === 'ADMIN') {
+            if ($responseMe['data']['userable_type'] === 'ADMIN') {
                 $request->session()->put('user', $responseMe['data']);
 
                 return redirect('/admin/games');

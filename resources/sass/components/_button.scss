@@ -1,4 +1,4 @@
-*:disabled{
+*:disabled {
     cursor: not-allowed;
 }
 
@@ -15,9 +15,10 @@
 }
 
 .btn-skip {
-    background-color: $blue-tp2 !important;
+    background-color: $blue-tp-2 !important;
     color: $blue !important;
     border: 0;
+
     &:hover {
         background: $blue-2;
     }
@@ -30,12 +31,15 @@
     width: 100%;
     color: $black-1;
     cursor: pointer;
+
     a {
         text-decoration: none;
     }
+
     &:hover {
         background-color: $blue-tp;
         color: $purple;
+
         a {
             color: $purple;
         }
@@ -76,6 +80,7 @@
     padding-right: 1.6rem;
     @include h5;
     text-align: start;
+
     &:hover {
         background: $grey-10;
     }
@@ -633,7 +638,7 @@
     flex-direction: row;
     padding: 1.4rem 2rem !important;
     color: $blue;
-    background: $blue-tp2;
+    background: $blue-tp-2;
 
     i {
         display: block !important;
@@ -732,7 +737,7 @@
 }
 
 .btn-ma-view-as {
-    background-color: $blue-tp2;
+    background-color: $blue-tp-2;
     height: 160px;
     width: 160px;
     text-align: center;
@@ -770,4 +775,355 @@
     &:focus {
         outline: 0;
     }
+}
+
+
+// Refactor New Button
+$theme-button: ("btn-small"(8px 12px),
+  "btn-medium"(10px 16px),
+  "btn-large"(12px 18px),
+  "btn-extra-large"(14px 20px),
+);
+
+.btn-giant-primary-bold {
+  width: fit-content;
+  height: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 28px;
+  box-shadow: 0px 1px 3px rgba(65, 51, 104, 0.12), 0px 1px 2px rgba(65, 51, 104, 0.24);
+  padding: 12px 32px;
+  background: #3167F6;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+
+@each $name,
+$size in $theme-button {
+  $colors: ("primary");
+  $types: ("bold"#3167F6 #FFFFFF #FFFFFF #FFFFFF #0132E1 #1888FF (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)),
+      "light"#E9F2FF #3167F6 #1888FF #0132E1 #E9F2FF #E9F2FF (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)),
+      "plain"#FFFFFF #3167F6 #1888FF #0132E1 #ffffff #ffffff unset,
+      "link"#ffffff #3167F6 #1888FF #0132E1 #ffffff #ffffff unset);
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $active-bg,
+    $background-hover,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: $hover;
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          background: $background-hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: inset 0px -2px 0px rgba(255, 255, 255, 0.15), inset 0px 1px 3px rgba(65, 51, 104, 0.2);
+          background: $active-bg;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled {
+          background: #DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+}
+
+@each $name,
+$size in $theme-button {
+  $colors: ("danger");
+  $types: ("bold"#FF4343 #FFFFFF #FFFFFF #FFFFFF #DD1F1F #FF6666 (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)),
+      "plain"#FFFFFF #878AA6 #FF4343 #DD1F1F #ffffff #ffffff unset,
+      "light"#FFF4F4 #FF4343 #FF6666 #DD1F1F #FFF4F4 #FFF4F4 (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)));
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $active-bg,
+    $background-hover,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: $hover;
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          background: $background-hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: inset 0px -2px 0px rgba(255, 255, 255, 0.15), inset 0px 1px 3px rgba(65, 51, 104, 0.2);
+          background: $active-bg;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled {
+          background: #DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+}
+
+@each $name,
+$size in $theme-button {
+  $colors: ("neutral");
+  $types: ("plain"#ffffff #4C516D #3167F6 #0132E1 unset,
+      "light"#F6F6FC #4C516D #4C516D #4C516D unset,
+    );
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: $hover;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled {
+          background: #DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+}
+
+@each $name,
+$size in $theme-button {
+  $colors: ("accent-2");
+  $types: ("bold"#7233DA #FFFFFF #FFFFFF #FFFFFF #5616C0 #986CE0 (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)),
+      "light"#F7F4FB #7233DA #986CE0 #5616C0 #F7F4FB #F7F4FB (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)));
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $active-bg,
+    $background-hover,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px rgba(65, 51, 104, 0.12), 0px 1px 2px rgba(65, 51, 104, 0.24);
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          background: $background-hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: inset 0px -2px 0px rgba(255, 255, 255, 0.15), inset 0px 1px 3px rgba(65, 51, 104, 0.2);
+          background: $active-bg;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled {
+          background: #DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+}
+
+
+@each $name,
+$size in $theme-button {
+  $colors: ("success");
+  $types: ("bold"#4DC978 #FFFFFF #FFFFFF #FFFFFF #00AC5A #70DB95 (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)),
+      "light"#E9F2FF #19CE58 #4DC978 #00AC5A #F0FFF4 #F0FFF4 (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)), );
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $active-bg,
+    $background-hover,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px rgba(65, 51, 104, 0.12), 0px 1px 2px rgba(65, 51, 104, 0.24);
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          background: $background-hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: inset 0px -2px 0px rgba(255, 255, 255, 0.15), inset 0px 1px 3px rgba(65, 51, 104, 0.2);
+          background: $active-bg;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled {
+          background: #DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+}
+
+@each $name,
+$size in $theme-button {
+  $colors: ("accent-1");
+  $types: ("bold"#F13392 #FFFFFF #FFFFFF #FFFFFF #E9007C #FF58AC (0px 3px 6px rgba(65, 51, 104, 0.15), 0px 2px 4px rgba(65, 51, 104, 0.12)), );
+
+  @each $color in $colors {
+
+    @each $type,
+    $background,
+    $font-color,
+    $hover-font,
+    $active-font,
+    $active-bg,
+    $background-hover,
+    $hover in $types {
+      .#{$name}-#{$color}-#{$type} {
+        width: fit-content;
+        height: auto;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px rgba(65, 51, 104, 0.12), 0px 1px 2px rgba(65, 51, 104, 0.24);
+        padding: $size;
+        background: $background;
+        color: $font-color;
+        cursor: pointer;
+        border: unset;
+
+        &:hover {
+          box-shadow: $hover;
+          background: $background-hover;
+          color: $hover-font;
+        }
+
+        &:active {
+          box-shadow: inset 0px -2px 0px rgba(255, 255, 255, 0.15), inset 0px 1px 3px rgba(65, 51, 104, 0.2);
+          background: $active-bg;
+          color: $active-font;
+        }
+
+        &:focus {
+          outline: unset;
+        }
+
+        &:disabled{
+          background:#DCDEED;
+          cursor: not-allowed;
+          box-shadow: unset;
+        }
+      }
+    }
+  }
 }

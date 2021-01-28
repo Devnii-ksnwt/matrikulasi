@@ -5,15 +5,72 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Services\Batch as BatchApi;
 use App\Services\Game;
+use App\Services\Question;
 use App\Services\Report as ReportApi;
 use App\Services\Round as RondeApi;
+use App\Services\RoundQuestion;
 use App\Services\Stage as StageApi;
+use App\Services\Student;
 use App\Services\StudentGroup as StudentApi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
 {
+
+    public function showRound($game, $stageId)
+    {
+        $gameApi = new Game;
+        $stageApi = new StageApi;
+        $roundApi = new RondeApi;
+
+        $game = $gameApi->parse($game);
+        $stage = $stageApi->getDetail(strtolower($game['uri']), $stageId)['data'] ?? [];
+
+        $filter = [
+            'filter[stage_id]' => $stageId,
+        ];
+        $rounds = $roundApi->index($filter)['data'] ?? [];
+        usort($rounds, fn ($a, $b) => $a['order'] <=> $b['order']);
+
+        if (!request()->round) {
+            request()->round = $rounds[0]['id'];
+        }
+
+        $round = $roundApi->getDetail(request()->round)['data'] ?? [];
+
+        $questions = [];
+        if (request()->round) {
+            $roundQuestionApi = new RoundQuestion;
+            $roundQuestions = $roundQuestionApi->getAll(request()->round, request()->page ?? 1);
+
+            $questionApi = new Question;
+            foreach ($roundQuestions['data'] as $RQ) {
+                $questions[] = $questionApi->getDetail($RQ['question_id'])['data'];
+            }
+
+            $round = $roundApi->getDetail(request()->round)['data'] ?? [];
+        }
+
+        return view(
+            'teacher.rounds.rounds',
+            compact('game', 'stage', 'rounds', 'round', 'roundQuestions', 'questions'),
+        );
+    }
+
+    public function showStudent($game, $stageId, $studentId)
+    {
+        $gameApi = new Game;
+        $stageApi = new StageApi;
+        $studentApi = new Student;
+
+        $game = $gameApi->parse($game);
+        $stage = $stageApi->getDetail(strtoupper($game['uri']), $stageId)['data'] ?? [];
+
+        $student = $studentApi->detail($studentId)['data'] ?? [];
+        
+        return view('teacher.students.show', compact('game', 'stage', 'student'));
+    }
 
     public function index(Request $request, $game, $batchId, $studentGroupId, $stageId)
     {

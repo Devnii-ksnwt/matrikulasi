@@ -66,7 +66,7 @@
                             html += getHtml(element)
                     }
                 } else {
-                    html = '<h5 class="text-center">Tidak ada data</h5>';
+                    html = '<h5 class="text-center">Babak pada game ini akan segera hadir.</h5>';
                 }
 
                 $('.list-group-student').html(html);

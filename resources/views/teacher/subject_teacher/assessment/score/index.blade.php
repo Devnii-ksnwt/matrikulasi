@@ -230,7 +230,25 @@
             });
     }
 
+    function changeModalContent(type) {
+        if (type == 1) {
+            $("#modal-content-package").show();
+            $("#modal-content-schedule").hide();
+        }else if(type == 2){
+
+            var check_package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
+            if (check_package_choices.length > 0) {
+                $("#modal-content-package").hide();
+                $("#modal-content-schedule").show();
+            }else{
+                alert('Silahkan pilih paket data.');
+            }
+        }
+    }
+
     function viewCreateSchedule(idStudent, nameStudent) {
+
+        changeModalContent(1);
         studentId = idStudent;
         studentName = nameStudent;
 
@@ -238,7 +256,7 @@
 
         var footerModal = `<div class="modal-footer justify-content-end">\
         <div>\
-        <button class="btn btn-link" data-dismiss="modal">Batal</button>\
+        <button class="btn btn-link" onclick="changeModalContent(1)">Batal</button>\
         <button class="btn btn-primary" id="createAssgin" onclick="createNewAssign()">Tugaskan</button>\
         </div>\
         </div>`;
@@ -250,6 +268,7 @@
             keyboard: false,
             show: true,
         });
+
     }
 
     function viewDelete() {
@@ -273,6 +292,7 @@
     }
 
     function viewUpdateSchedule(idStudent, nameStudent, idSchedule, scheduleStart, scheduleFinish, token) {
+        changeModalContent(1);
         studentId = idStudent;
         studentName = nameStudent;
         scheduleId = idSchedule;
@@ -284,7 +304,7 @@
         <button class="btn btn-link text-grey-6" data-dismiss="modal" onclick="viewDelete()">Hapus</button>\
         </div>\
         <div>\
-        <button class="btn btn-link" data-dismiss="modal">Batal</button>\
+        <button class="btn btn-link" onclick="changeModalContent(1)">Batal</button>\
         <button class="btn btn-primary" id="updateAssign" onclick="updateAssign()">Simpan</button>\
         </div>\
         </div>`;
@@ -316,6 +336,8 @@
             keyboard: false,
             show: true,
         });
+
+        changeModalContent(1);
     }
 
     function modalAssignShow(val, withValidation = false) {
@@ -404,6 +426,8 @@
 
         }
 
+        var package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
+
         var values = [];
 
         values.push(studentId);
@@ -414,6 +438,7 @@
             typeAssesment,
             data: values,
             token,
+            package_choices,
             assesment,
             start_date: start_date,
             expiry_date: expiry_date,
@@ -553,11 +578,13 @@
             }
 
         }
+        var package_choices = $("input[name='package_choice[]']:checked").map(function(){return $(this).val();}).get();
 
         let data = new Object();
         data = {
             scheduleId: scheduleId,
             token,
+            package_choices,
             startDate: start_date,
             expiryDate: expiry_date,
             typeAssesment,

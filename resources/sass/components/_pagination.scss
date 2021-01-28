@@ -48,3 +48,18 @@
         }
     }
 }
+
+.page-item {
+
+    .page-link {
+        @include h6-reg;
+        padding: 0.8rem 1.2rem;
+    }
+
+    &.active .page-link {
+        @include h6;
+        font-weight: bold;
+        background: $blue-tp !important;
+        color: $blue !important;
+    }
+}

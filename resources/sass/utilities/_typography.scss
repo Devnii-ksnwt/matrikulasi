@@ -1,5 +1,5 @@
 body {
-    font-family: $font-family-monospace;
+    font-family: $font-family-sans-serif;
     font-size: 1.5rem;
     line-height: 2.4rem;
     color: $black-1;
@@ -8,20 +8,19 @@ body {
     background: $white;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: unset;
 }
 
-h1 {
-    font-size: 3.3rem;
-    line-height: 3.6rem;
-}
-
 @mixin h1 {
-    font-weight: bold;
     font-size: 3.3rem;
     line-height: 3.6rem;
+    font-style: normal;
 }
 
 @mixin h1-reg {
@@ -30,15 +29,20 @@ h1 {
     line-height: 3.6rem;
 }
 
-h2 {
-    font-size: 2.5rem;
-    line-height: 2.8rem;
+h1 {
+    font-weight: 600;
+    @include h1;
+}
+
+.h1-reg {
+    font-weight: normal;
+    @include h1;
 }
 
 @mixin h2 {
-    font-weight: bold;
     font-size: 2.5rem;
     line-height: 2.8rem;
+    font-style: normal;
 }
 
 @mixin h2-reg {
@@ -47,15 +51,20 @@ h2 {
     line-height: 2.8rem;
 }
 
-h3 {
-    font-size: 1.9rem;
-    line-height: 2.4rem;
+h2 {
+    font-weight: 600;
+    @include h2;
+}
+
+.h2-reg {
+    font-weight: normal;
+    @include h2;
 }
 
 @mixin h3 {
-    font-weight: bold;
     font-size: 1.9rem;
     line-height: 2.4rem;
+    font-style: normal;
 }
 
 @mixin h3-reg {
@@ -64,15 +73,20 @@ h3 {
     line-height: 2.4rem;
 }
 
-h4 {
-    font-size: 1.7rem;
-    line-height: 2rem;
+h3 {
+    font-weight: 600;
+    @include h3;
+}
+
+.h3-reg {
+    font-weight: normal;
+    @include h3;
 }
 
 @mixin h4 {
-    font-weight: bold;
     font-size: 1.7rem;
     line-height: 2rem;
+    font-style: normal;
 }
 
 @mixin h4-reg {
@@ -81,15 +95,20 @@ h4 {
     line-height: 2rem;
 }
 
-h5 {
-    font-size: 1.5rem;
-    line-height: 2rem;
+h4 {
+    font-weight: 600;
+    @include h4;
+}
+
+.h4-reg {
+    font-weight: normal;
+    @include h4;
 }
 
 @mixin h5 {
-    font-weight: bold;
     font-size: 1.5rem;
     line-height: 2rem;
+    font-style: normal;
 }
 
 @mixin h5-reg {
@@ -98,15 +117,20 @@ h5 {
     line-height: 2rem;
 }
 
-h6 {
-    font-size: 1.3rem;
-    line-height: 1.6rem;
+h5 {
+    font-weight: 600;
+    @include h5;
+}
+
+.h5-reg {
+    font-weight: normal;
+    @include h5;
 }
 
 @mixin h6 {
-    font-weight: bold;
     font-size: 1.3rem;
     line-height: 1.6rem;
+    font-style: normal;
 }
 
 @mixin h6-reg {
@@ -114,6 +138,17 @@ h6 {
     font-size: 1.3rem;
     line-height: 1.6rem;
 }
+
+h6 {
+    font-weight: 600;
+    @include h6;
+}
+
+.h6-reg {
+    font-weight: normal;
+    @include h6;
+}
+
 
 .label {
     font-weight: normal;
@@ -145,24 +180,39 @@ p {
     line-height: 2.4rem;
 }
 
+.p-bold {
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+}
+
+.p-small {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.3rem;
+    line-height: 2rem;
+}
+
 pre {
     font-weight: normal;
     font-size: 1.5rem;
     line-height: 2.4rem;
 }
 
-.display-1, .display-2, .display-3 {
+.display-1,
+.display-2,
+.display-3 {
     font-weight: normal;
 }
 
 .display-1 {
-    font-size: 6.4rem;
+    font-size: 6rem;
     line-height: 8rem;
 }
 
 .display-2 {
     font-size: 4.8rem;
-    line-height: 5.6rem;
+    line-height: 6.4rem;
 }
 
 .display-3 {
