@@ -115,6 +115,13 @@
                                 <p class="card-text">Menulis kata yang tepat agar menjadi kalimat yang efektif.</p>
                             </div>
                         </a>
+                        <a href="{{ url('admin/games/tutorial') }}" class="card">
+                            <img src="{{ asset('assets/images/home/tutorial.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Tutorial</h5>
+                                <p class="card-text">Semua hasil tentu memerlukan proses</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

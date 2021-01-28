@@ -148,7 +148,7 @@ class HomeController extends Controller
 
         return $assessmentGroupApi->index($filter);
     }
-
+    
     public function createAssessmentGroup()
     {
         $assessmentGroupApi = new AssessmentGroup;
