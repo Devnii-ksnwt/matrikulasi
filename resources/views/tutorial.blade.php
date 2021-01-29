@@ -11,8 +11,8 @@
         <div class="row dashboar">
         <div class="list-group" data-url="#" data-token="73KouQmgjhsvLk506NCiqOJL2C9xMVxPbe8obtHJ">
                             <div class="list-group-item" data-toggle="collapse" data-target="#collapse-ccfe496f-e098-402f-a0d2-7e46399eb419" aria-expanded="false" aria-controls="collapse-ccfe496f-e098-402f-a0d2-7e46399eb419">
-                    <a href="http://localhost:10056/admin/games/tutorial/penilaian/" class="col-12">
-                        <i class="kejar-mapel" data-toggle="collapse" data-target="#collapse-ccfe496f-e098-402f-a0d2-7e46399eb419" aria-expanded="false" aria-controls="collapse-ccfe496f-e098-402f-a0d2-7e46399eb419"></i>
+                             <a href="{{ url('admin/games/tutorial/penilaian') }}" class="col-12">
+                                 <i class="kejar-mapel" data-toggle="collapse" data-target="#collapse-ccfe496f-e098-402f-a0d2-7e46399eb419" aria-expanded="false" aria-controls="collapse-ccfe496f-e098-402f-a0d2-7e46399eb419"></i>
                        Penilaian
                     </a>
                 </div>
