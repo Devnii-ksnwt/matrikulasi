@@ -16,15 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@login');
-Route::get('admin/games/tutorial', function(){
-    return view ('tutorial');
-});
-Route::get('admin/games/tutorial/penilaian', function(){
-    return view ('penilaian');
-});
-Route::get('admin/games/tutorial/penilaian/input', function(){
-    return view ('input');
-});
+Route::get('admin/games/tutorial', fn () => view('tutorial'));
+Route::get('admin/games/tutorial/penilaian', fn () => view('penilaian'));
+Route::get('admin/games/tutorial/penilaian/input', fn () => view('input'));
 Route::get('/debug-sentry', function () {
     throw new Exception('My first Sentry error!');
 });
