@@ -7,6 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 <div class="container">
+
             <!-- Link Back -->
             <a class ="btn-back" href="http://localhost:10056/admin/games">
                 <i class="kejar-back"></i>Kembali
@@ -24,6 +25,7 @@
                     <a href="javascript:void(0)" id="nav-0" style="cursor: pointer;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="kejar-edit"></i>
                     </a>
+
             <!-- Dropdown Menu -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="nav-0">
                 <a class="dropdown-item font-15" id="edit-q-0" data-toggle="modal" style="cursor: pointer;" data-target="#update-pilihan-ganda"  data-url="http://localhost:10056/teacher/subject-teacher/assessment/question/e7f3bbd1-d13a-4aa7-a57a-3701a9354095/edit">
@@ -51,34 +53,38 @@
                 </a>
                 </h2>
             </div> 
+            
+            <!-- Dropdown -->
 
             <!-- textarea -->
                 <textarea id="message" rows="10" cols="85">
                 </textarea>
 
-            <div class="modal-footer">
-                <div class="ckeditor-btn-group button">
-                    <button type="button" class="bold-btn" title="Bold (Ctrl + B)">
-                        <i class="kejar-bold"></i>
-                    </button>
-                    <button type="button" class="italic-btn" title="Italic (Ctrl + I)">
-                        <i class="kejar-italic"></i>
-                    </button>
-                    <button type="button" class="underline-btn" title="Underline (Ctrl + U)">
-                        <i class="kejar-underlined"></i>
-                    </button>
-                    <button type="button" class="bullet-list-btn" title="Bulleted list">
-                        <i class="kejar-bullet"></i>
-                    </button>
-                    <button type="button" class="number-list-btn" title="Number list">
-                        <i class="kejar-number"></i>
-                    </button>
-                    <button type="button" class="photo-btn" title="Masukkan foto">
-                        <i class="kejar-photo"></i>
-                    </button>
-                </div>
+                <div class="modal-footer">
+                    <div class="modal-body">
+                        <div class="ckeditor-btn-group">
+                            <button type="button" class="bold-btn" title="Bold (Ctrl + B)">
+                                <i class="kejar-bold"></i>
+                            </button>
+                            <button type="button" class="italic-btn" title="Italic (Ctrl + I)">
+                                <i class="kejar-italic"></i>
+                            </button>
+                            <button type="button" class="underline-btn" title="Underline (Ctrl + U)">
+                                <i class="kejar-underlined"></i>
+                            </button>
+                            <button type="button" class="bullet-list-btn" title="Bulleted list">
+                                <i class="kejar-bullet"></i>
+                            </button>
+                            <button type="button" class="number-list-btn" title="Number list">
+                                <i class="kejar-number"></i>
+                            </button>
+                            <button type="button" class="photo-btn" title="Masukkan foto">
+                                <i class="kejar-photo"></i>
+                            </button>
+                        </div>
+                        </div>
                     <button type="button" class="btn package" data-dismiss="modal">Simpan</button>
                     <button type="submit" class="btn btn-primary" >Terbitkan</button>
-            </div>
+                </div>
 </div>
 
